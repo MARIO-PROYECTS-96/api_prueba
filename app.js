@@ -8,6 +8,7 @@ const passport = require('passport'); // Importa passport
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
 const dataRouter = require('./routes/dataRoutes'); // Asegúrate de importar tus rutas de datos
+const loginRouter = require('./routes/loginRoutes'); // Importa las rutas de login
 
 const app = express();
 
@@ -25,6 +26,8 @@ app.use(passport.initialize()); // Inicializa passport
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/api', dataRouter); // Utiliza tus rutas de datos
+app.use('/api', loginRouter); // Utiliza las rutas de login
+
 
 app.use(function(req, res, next) {
   next(createError(404));

@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
-const dataController = require('../controllers/userController');
-const authenticateJWT = require('../config/auth').authenticateJWT; // Middleware de autenticación JWT
-const loginController = require('../controllers/loginController'); // Importa el controlador de inicio de sesión
+const userController = require('../controllers/userController');
+const authenticateJWT = require('../config/auth').authenticateJWT;
 
-// Ruta de inicio de sesión
-router.post('/login', loginController.login);
-
-// Ruta protegida con autenticación JWT
-router.get('/data', authenticateJWT, dataController.getAllUsers);
+// Rutas CRUD para usuarios
+router.get('/users', authenticateJWT, userController.getAllUsers);
+router.get('/users/:id', authenticateJWT, userController.getUserById);
+router.post('/users', authenticateJWT, userController.createUser);
+router.put('/users/:id', authenticateJWT, userController.updateUser);
+router.delete('/users/:id', authenticateJWT, userController.deleteUser);
 
 module.exports = router;

@@ -1,7 +1,5 @@
 // En tu modelo de usuario (dataModel.js)
 
-// En tu modelo de usuario (dataModel.js)
-
 const db = require('../config/dbConfig');
 
 const User = {};
@@ -18,18 +16,6 @@ User.findOne = (username) => {
       } else {
         resolve(null); // Resuelve la promesa con null si no se encontró ningún usuario
       }
-    });
-  });
-};
-
-User.getAll = () => {
-  return new Promise((resolve, reject) => {
-    db.query('SELECT * FROM users', (err, res) => {
-      if (err) {
-        reject(err);
-        return;
-      }
-      resolve(res); // Resuelve la promesa con todos los usuarios encontrados
     });
   });
 };

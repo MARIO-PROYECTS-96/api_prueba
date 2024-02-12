@@ -1,13 +1,13 @@
 // dataController.js
 
-const Data = require('../models/dataModel');
+const User = require('../models/userModel');
 
-exports.getAllData = (req, res) => {
-  Data.getAll((err, data) => {
+exports.getAllUsers = (req, res) => {
+  User.getAll((err, users) => {
     if (err) {
       res.status(500).json({ message: err.message });
       return;
     }
-    res.json(data);
+    res.json(users);
   });
 };

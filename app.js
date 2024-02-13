@@ -1,14 +1,14 @@
-const createError = require('http-errors');
 const express = require('express');
 const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-const passport = require('passport'); // Importa passport
+const cors = require('cors'); // Importa cors
+const passport = require('passport');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
-const dataRouter = require('./routes/dataRoutes'); // Asegúrate de importar tus rutas de datos
-const loginRouter = require('./routes/loginRoutes'); // Importa las rutas de login
+const dataRouter = require('./routes/dataRoutes');
+const loginRouter = require('./routes/loginRoutes');
 
 const app = express();
 
@@ -21,13 +21,15 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(passport.initialize()); // Inicializa passport
+app.use(passport.initialize());
+
+// Configura CORS
+app.use(cors());
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/api', dataRouter); // Utiliza tus rutas de datos
-app.use('/api', loginRouter); // Utiliza las rutas de login
-
+app.use('/api', dataRouter);
+app.use('/api', loginRouter);
 
 app.use(function(req, res, next) {
   next(createError(404));
